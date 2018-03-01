@@ -67,5 +67,34 @@ For the changes to take effect, we need to reboot our machines. For both master 
 
 > reboot
 
+Log in to both machines and open a terminal.  YOu should see the hostname changes having taken effect (master is called hduser@master and slave is called hduser@slave).  If not, check again that the hostname file was changed and saved as outlined above.
 
+For a sanity check though, run the following command on both master and slave:
 
+> hostname
+
+You should get master and slave as output for the particular machine.
+
+# # Ping Master and Slave using host name
+
+We will now try to ping each node using the host name rather than the IP address.  This will confirm that the IP addresses and names were changed correctly.  
+
+> ping slave01
+
+You should see something similar to the following:
+
+```
+hduser@master:~$ ping slave01
+PING slave01 (10.131.248.81) 56(84) bytes of data.
+64 bytes from slave01 (10.131.248.81): icmp_seq=1 ttl=64 time=0.313 ms
+64 bytes from slave01 (10.131.248.81): icmp_seq=2 ttl=64 time=0.340 ms
+64 bytes from slave01 (10.131.248.81): icmp_seq=3 ttl=64 time=0.340 ms
+64 bytes from slave01 (10.131.248.81): icmp_seq=4 ttl=64 time=0.456 ms
+64 bytes from slave01 (10.131.248.81): icmp_seq=5 ttl=64 time=0.722 ms
+64 bytes from slave01 (10.131.248.81): icmp_seq=6 ttl=64 time=0.354 ms
+^C
+--- slave01 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5106ms
+rtt min/avg/max/mdev = 0.313/0.420/0.722/0.144 ms
+hduser@master:~$ 
+```
