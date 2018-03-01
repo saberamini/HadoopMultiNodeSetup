@@ -75,7 +75,7 @@ For a sanity check though, run the following command on both master and slave:
 
 You should get master and slave as output for the particular machine.
 
-# # Ping Master and Slave using host name
+## Ping Master and Slave using host name
 
 We will now try to ping each node using the host name rather than the IP address.  This will confirm that the IP addresses and names were changed correctly.  
 
@@ -106,7 +106,7 @@ Similarly, perform the same test on the slave
 You should get a similar output as for the master case.  If not, then check your hosts files (sudo gedit /etc/hosts) and make sure the name of the machines and their ip addresses have correctly been entered.
 
 
-# # Test SSH connectivity
+## Test SSH connectivity
 
 From both the slaev and master, try to first ssh to your own machine and to the other machine.  
 
@@ -116,7 +116,7 @@ From both the slaev and master, try to first ssh to your own machine and to the 
 
 Type yes for any prompts.  You should be able to SSH without any password requests.
 
-# # Update your configuration files
+## Update your configuration files
 
 You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Bring up the file in a text editor.
 
