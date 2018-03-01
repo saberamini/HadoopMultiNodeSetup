@@ -27,17 +27,35 @@ Now the names may seem strange but essentially they are java <a href="https://en
 
 Here each box represents a physical maschine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode, ResourceManager) and each slave node will have two daemons (DataNode, NodeManager).
 
-As the diagram above shows, in a typical commerical cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daeom SecondaryNameNode - the purpose of which is to take over in case the main master node fails.
+As the diagram above shows, in a typical commerical cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daeom SecondaryNameNode - the purpose of which is to take over in case the main master node fails (essentially a backup).
 
 Looking at the slave data nodes, the RAM is not a big deal but storage must be very large because this is where your data is being stored.
 
-Finally, we should always have a homogeneous software 
+Finally, we should always have a homogeneous software (OS, Hadoop) running on all the machines.
 
 We will try to replicate a real world cluster by having a master and a slave node on a virtual machine.  
 
+# Hadoop Multi-Node Cluster Setup
 
-After the clone, for each node click on settings, Network and change the adaptor to 
-Check if the slave node and the main node can communicate with each other.  We will do this by "pinging" each using the ping command from the terminal.
+From your first tutorial, you should have a working single cluster node already setup.  We will simply copy or "clone" this virtual machine two times and use one as a Master and one as a Slave.
+
+Make sure your machine is powered off.  Right click on your machine and choose clone.
+
+<img src="CloningMachine.jpg" alt="Cloning Machine" align="middle">
+
+Call the machine "Master" and make sure the option "Reinitialize the MAC address of all network cards" is selected.
+
+<img src="CloningMachine2.jpg" alt="Cloning Machine" align="middle">
+
+Make another clone and call it "slave01"
+
+After the clone, for each machine (master, slave01) click on settings, Network and change the adaptor to "Bridged Adapter"
+
+<img src="CloningMachine2.jpg" alt="Cloning Machine" align="middle">
+
+## Communication between slave and master
+
+We now want to check and see if the slave node and the main node can communicate with each other.  We will do this by "pinging" each using the ping command from the terminal.
 
 In each machine, type the following command:
 
@@ -45,6 +63,7 @@ In each machine, type the following command:
 
 Take note of the output and jot down the ip address for both your original node (the master) and the slave node as shown in the figure below.
 
+<img src="IPAddressOfNode.jpg" alt="Finding IP Address" align="middle">
 
 Now try to ping both the slave and the master from the other machine.
 
@@ -282,7 +301,7 @@ Before starting the cluster, we need to format our namenode:
 
 ## Start HDFS and YARN (master only)
 
-We will start our daemons on our master node.
+We will start our daemons on our master node.  The master will then log onto to the slave node and start the necessary deamons there through ssh.
 
 > start-dfs.sh
 
@@ -312,20 +331,5 @@ hduser@slave01:~$ jps
 2253 NodeManager
 2284 DataNode
 ```
-Now start YARN:
 
-> start-yarn.sh
-
-The master will then log onto to the slave node and start the necessary deamons there through ssh.
-
-Now see the java proceses that you have:
-
-> jps
-
-You should see should see a Namenode daemon.
-
-Now go to your slave node:
-
-> jps
-
-You should see a Datanode started here.
+At this point, your mini cluster is setup and you can go on to test it as you did with the single cluster (HDFS files and MapReduce job).
