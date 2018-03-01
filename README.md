@@ -98,3 +98,11 @@ PING slave01 (10.131.248.81) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.313/0.420/0.722/0.144 ms
 hduser@master:~$ 
 ```
+
+Similarly, perform the same test on the slave
+
+> ping master
+
+You should get a similar output as for the master case.  If not, then check your hosts files (sudo gedit /etc/hosts) and make sure the name of the machines and their ip addresses have correctly been entered.
+
+
