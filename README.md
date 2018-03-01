@@ -4,7 +4,7 @@ So far we have spent a lot of time dealing with specific details of setting up t
 
 Towards that goal, for this tutorial, we would like to start off with a birds eye view of where things fit in.  You always have to look at a Hadoop ecosystem in two ways: one is storage and one is processing.  Hadoop always revolves around either storage or processing.  All the "technologies" that we briefly mentioned (MapReduce, Hive, PIG, Spark etc) somehow fit into one of these tasks and not all are complementary.  Some technologies are replacing others and the ecosystem is continuously evolving.
 
-To get a sense of why we need Hadoop, it is a good idea to take a look at a real world example.  When purchasng any product on the web these days, you are often get suggestions on what other users of similar products have bought.  THis is called a <b>recommendation enging</b> and Amazon was the first to implement it.  According to them, within the first month of implementing this recommendation enging, their sales jumped 30%!
+To get a sense of why we need Hadoop, it is a good idea to take a look at a real world example.  When purchasing any product on the web these days, you are often get suggestions on what other users of similar products have bought.  This is called a <b>recommendation engine</b> and Amazon was the first to implement it.  According to them, within the first month of implementing this recommendation engine, their sales jumped 30%!
 
 Now to make accurate predictions with a recommendation engine, you need historical data.  The more data you have, the more accurate the recommendation will be.  Now perhaps if you are looking at the data from the last 2 months, this may not be a problem but when you look at data for the past year, past 5 years, the volume of data just becomes unmanageable.  This is the whole concept of "Big Data".
 
@@ -18,7 +18,7 @@ The <b>storage is called HDFS</b> or Hadoop Distributed File System and the <b>p
 
 The architecture for both these components is based on a master and slave system.  For HDFS, the master is called NameNode and the slave is called DataNode.  For YARN, the master is called Resource Manager and the slave is called NodeManager.  SecondaryNameNode in the daigram above is just a backup for NameNode.  
 
-Now the names may seem strange but essentially they are java <a href="https://en.wikipedia.org/wiki/Daemon_(computing)">daeomons</a>, processes that run indefinitely (unless you specifically stop them) and manage the storage and the processing of information.  The java processes for HDFS are built into the Apache Hadoop and you downloaded and installed this in the first tutorial.  THe MapReduce framework is also implemented but the actual programming for a particular problem (the mapping and reducing) must be written by a developer.  We looked at a very simple example of using MapReduce to find the word count of a textfile but there can be other more interesting problems that we will look at later.
+Now the names may seem strange but essentially they are java <a href="https://en.wikipedia.org/wiki/Daemon_(computing)">daeomons</a>, processes that run indefinitely (unless you specifically stop them) and manage the storage and the processing of information.  The java processes for HDFS are built into the Apache Hadoop and you downloaded and installed this in the first tutorial.  The MapReduce framework is also implemented but the actual programming for a particular problem (the mapping and reducing) must be written by a developer.  We looked at a very simple example of using MapReduce to find the word count of a textfile but there can be other more interesting problems that we will look at later.
 
 <b>Physically</b>, a Hadoop cluster may look like the following:
 
@@ -27,7 +27,7 @@ Now the names may seem strange but essentially they are java <a href="https://en
 
 Here each box represents a physical maschine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode, ResourceManager) and each slave node will have two daemons (DataNode, NodeManager).
 
-As the diagram above shows, in a typical commerical cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daeom SecondaryNameNode - the purpose of which is to take over in case the main master node fails (essentially a backup).
+As the diagram above shows, in a typical commercial cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daemon SecondaryNameNode - the purpose of which is to take over in case the main master node fails (essentially a backup).
 
 Looking at the slave data nodes, the RAM is not a big deal but storage must be very large because this is where your data is being stored.
 
