@@ -3,7 +3,7 @@
 After the clone, for each node click on settings, Network and change the adaptor to 
 Check if the slave node and the main node can communicate with each other.  We will do this by "pinging" each using the ping command from the terminal.
 
-IN each machine, type the following command:
+In each machine, type the following command:
 
 > ifconfig
 
