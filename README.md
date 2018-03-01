@@ -4,7 +4,23 @@ So far we have spent a lot of time dealing with specific details of setting up t
 
 Towards that goal, for this tutorial, we would like to start off with a birds eye view of where things fit in.  You always have to look at a Hadoop ecosystem in two ways: one is storage and one is processing.  Hadoop always revolves around either storage or processing.  All the "technologies" that we briefly mentioned (MapReduce, Hive, PIG, Spark etc) somehow fit into one of these tasks and not all are complementary.  Some technologies are replacing others and the ecosystem is continuously evolving.
 
+To get a sense of why we need Hadoop, it is a good idea to take a look at a real world example.  When purchasng any product on the web these days, you are often get suggestions on what other users of similar products have bought.  THis is called a <b>recommendation enging</b> and Amazon was the first to implement it.  According to them, within the first month of implementing this recommendation enging, their sales jumped 30%!
+
+Now to make accurate predictions with a recommendation engine, you need historical data.  The more data you have, the more accurate the recommendation will be.  Now perhaps if you are looking at the data from the last 2 months, this may not be a problem but when you look at data for the past year, past 5 years, the volume of data just becomes unmanageable.  This is the whole concept of "Big Data".
+
+So now you need to somehow store this huge amount of data and then do some analysis on it.  Traditionally, you would have needed to invest in some kind of storage server - thousands upon thousands of computers in a environmentally controlled room with full time staff to look after and maintain it.  On top of this, you need to somehow analyze this data and it wasn't exactly clear how to approach this problem.
+
+This is where Hadoop came in as an alternative approach that addresses both the problem of storage and processing (analysis).  This can be shown in the diagram below:
+
 <img src="HadoopComponents.jpg" alt="The Forest" align="middle">
+
+The <b>storage is called HDFS</b> or Hadoop Distributed File System and the <b>processing is called MapReduce or YARN</b>.
+
+The architecture for both these components is based on a master and slave system.  For HDFS, the master is called NameNode and the slave is called DataNode.  For YARN, the master is called Resource Manager and the slave is called NodeManager.  SecondaryNameNode in the daigram above is just a backup for NameNode.  
+
+Now the names may seem strange but essentially they are java processes, programs that run and manage the storage and the processing of information.  The java processes for HDFS are built into the Apache Hadoop and you downloaded and installed this in the first tutorial.  THe MapReduce framework is also implemented but the actual programming for a particular problem (the mapping and reducing) must be written by a developer.  We looked at a very simple example of using MapReduce to find the word count of a textfile but there can be other more interesting problems that we will look at later.
+
+
 
 
 After the clone, for each node click on settings, Network and change the adaptor to 
