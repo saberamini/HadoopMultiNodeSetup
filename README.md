@@ -118,7 +118,11 @@ Type yes for any prompts.  You should be able to SSH without any password reques
 
 # # Update your configuration files
 
-You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Your core-site.xml file will therefore only have the following:
+You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Bring up the file in a text editor.
+
+> sudo gedit $HADOOP_CONF_DIR/core-site.xml
+
+Change core-site.xml file so that it only has the following:
 
 ```
   <property>  
@@ -129,5 +133,27 @@ You need to update your core-site.xml <b>for master and slave(s)</b> and "localh
 </configuration>
 ```
 
+For hdfs-site.xml configuration file, we need to delete any datanode parameters because our datanode is now on a separate machine (slave01).  So change the hdfs-site.xml according to the following:
 
-
+```
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+    <description> Default block replication.
+      The actual number of replications can be specified when the file is created.
+      The default is used if replication is not specified in create time.
+    </description>
+  </property>
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/hduser/hadoop_data/hdfs/namenode</value>
+  </property>
+  <property>. 
+     <name>dfs.permissions.enabled</name>
+     <value>false</value>
+     <description>If "true", enable permission checking in HDF.  If "false", permission checking is turned off, but all other behaviour is unchanged.  Switching from one parameter value to the other does not change the mode, ownder or group of files or directories
+     </description>
+  </property>
+</configuration>
+```
