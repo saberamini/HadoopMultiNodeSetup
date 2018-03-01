@@ -237,3 +237,9 @@ Similary in the slave nodes, I need to delete the datanode folder and recreate i
 > sudo chown hduser:hadoop -R /usr/local/hadoop_tmp/
 
 > sudo chmod 777 /usr/local/hadoop_tmp/hdfs/datanode
+
+## Format the Namenode (master only)
+
+Before starting the cluster, we need to format our namenode:
+
+> hdfs namenode -format
