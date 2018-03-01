@@ -106,3 +106,4 @@ Similarly, perform the same test on the slave
 You should get a similar output as for the master case.  If not, then check your hosts files (sudo gedit /etc/hosts) and make sure the name of the machines and their ip addresses have correctly been entered.
 
 
+# # Test SSH connectivity
