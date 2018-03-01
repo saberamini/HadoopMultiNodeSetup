@@ -20,14 +20,20 @@ The architecture for both these components is based on a master and slave system
 
 Now the names may seem strange but essentially they are java <a href="https://en.wikipedia.org/wiki/Daemon_(computing)">daeomons</a>, processes that run indefinitely (unless you specifically stop them) and manage the storage and the processing of information.  The java processes for HDFS are built into the Apache Hadoop and you downloaded and installed this in the first tutorial.  THe MapReduce framework is also implemented but the actual programming for a particular problem (the mapping and reducing) must be written by a developer.  We looked at a very simple example of using MapReduce to find the word count of a textfile but there can be other more interesting problems that we will look at later.
 
-Physically, a Hadoop cluster may look like the following:
+<b>Physically</b>, a Hadoop cluster may look like the following:
 
 <img src="TypicalCluster.jpg" alt="Typical cluster showing the HDFS daemons" align="middle">
 
 
-Here each box represents a physical maschine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode
+Here each box represents a physical maschine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode, ResourceManager) and each slave node will have two daemons (DataNode, NodeManager).
 
+As the diagram above shows, in a typical commerical cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daeom SecondaryNameNode - the purpose of which is to take over in case the main master node fails.
 
+Looking at the slave data nodes, the RAM is not a big deal but storage must be very large because this is where your data is being stored.
+
+Finally, we should always have a homogeneous software 
+
+We will try to replicate a real world cluster by having a master and a slave node on a virtual machine.  
 
 
 After the clone, for each node click on settings, Network and change the adaptor to 
