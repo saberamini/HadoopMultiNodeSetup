@@ -1,5 +1,7 @@
 # Hadoop Multi-Node Setup
 
+
+
 After the clone, for each node click on settings, Network and change the adaptor to 
 Check if the slave node and the main node can communicate with each other.  We will do this by "pinging" each using the ping command from the terminal.
 
@@ -116,7 +118,7 @@ From both the slave and master, try to first ssh to your own machine and to the 
 
 Type yes for any prompts.  <b>You should be able to SSH without any password requests</b>.  If you get a password request, despite having a public authorization key, this generally means that your permissions on the directory or files are incorrect.  Your permission for your user directory (hduser) and .ssh folder (among others) must be 700 or 755 (read, write and execute privileges for the host, read only for everyone else).  See the issue being discussed <a href="https://unix.stackexchange.com/questions/36540/why-am-i-still-getting-a-password-prompt-with-ssh-with-public-key-authentication"> here </a>
 
-### Update your configuration files
+## Update your configuration files
 
 You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Bring up the file in a text editor.
 
@@ -249,6 +251,34 @@ Before starting the cluster, we need to format our namenode:
 We will start our daemons on our master node.
 
 > start-dfs.sh
+
+> start-yarn.sh
+
+After HDFS and YARN are started, on the master node, check what daemons are running:
+
+> jps
+
+You should see three processes as shown:
+
+```
+hduser@master:~$ jps
+2737 NameNode
+2949 SecondaryNameNode
+3420 Jps
+3119 ResourceManager
+```
+On the slave node, check what processes are running:
+
+> jps
+
+You should see:
+```
+hduser@slave01:~$ jps
+2381 Jps
+2253 NodeManager
+2284 DataNode
+```
+Now start YARN:
 
 > start-yarn.sh
 
