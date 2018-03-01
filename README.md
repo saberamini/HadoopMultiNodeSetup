@@ -179,3 +179,18 @@ Now consequencyt in the slave node, you will have the datanode - it will store t
   </property>
 </configuration>
 ```
+
+Now we need to update our yarn-site.xml (across all nodes).  The only change here for us is to change the namenode from localhost to master.
+
+```
+<configuration>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name> mapred.job.tracker</name>
+    <value> master:9001</value>
+  </property>
+</configuration>
+```
