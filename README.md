@@ -108,4 +108,26 @@ You should get a similar output as for the master case.  If not, then check your
 
 # # Test SSH connectivity
 
+From both the slaev and master, try to first ssh to your own machine and to the other machine.  
+
+> ssh master
+
+> ssh slave01
+
+Type yes for any prompts.  You should be able to SSH without any password requests.
+
+# # Update your configuration files
+
+You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Your core-site.xml file will therefore only have the following:
+
+```
+  <property>  
+    <name>fs.defaultFS</name>
+    <value>hdfs://master:9000</value>
+    <description> localhost may be replaced with a DNS that points to the NameNode. </description>
+  </property>
+</configuration>
+```
+
+
 
