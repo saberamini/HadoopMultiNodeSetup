@@ -133,7 +133,7 @@ Change <b>core-site.xml</b> file so that it only has the following:
 </configuration>
 ```
 
-For hdfs-site.xml configuration file, we need to delete any datanode parameters because our datanode is now on a separate machine (slave01).  So change the <b>hdfs-site.xml</b> according to the following:
+For hdfs-site.xml configuration file, we need to delete any datanode parameters because our datanode is now on a separate machine (slave01).  In other words, the master node is our namenode and will not store any data - this will be done in the slave node (or slave nodes).  So change the <b>hdfs-site.xml</b> according to the following:
 
 ```
 <configuration>
@@ -148,6 +148,32 @@ For hdfs-site.xml configuration file, we need to delete any datanode parameters 
   <property>
     <name>dfs.namenode.name.dir</name>
     <value>file:///home/hduser/hadoop_data/hdfs/namenode</value>
+  </property>
+  <property>. 
+     <name>dfs.permissions.enabled</name>
+     <value>false</value>
+     <description>If "true", enable permission checking in HDF.  If "false", permission checking is turned off, but all other behaviour is unchanged.  Switching from one parameter value to the other does not change the mode, ownder or group of files or directories
+     </description>
+  </property>
+</configuration>
+```
+
+Now consequencyt in the slave node, you will have the datanode - it will store the data, but it will not have the namenode.  So we need to change the hdfs-site.xml file in the slave node and delete all references to the namenode.
+
+```
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+    <description> Default block replication.
+      The actual number of replications can be specified when the file is created.
+      The default is used if replication is not specified in create time.
+    </description>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home/hduser/hadoop_data/hdfs/datanode</value>
   </property>
   <property>. 
      <name>dfs.permissions.enabled</name>
