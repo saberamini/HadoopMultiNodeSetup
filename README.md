@@ -122,7 +122,7 @@ You need to update your core-site.xml <b>for master and slave(s)</b> and "localh
 
 > sudo gedit $HADOOP_CONF_DIR/core-site.xml
 
-Change core-site.xml file so that it only has the following:
+Change <b>core-site.xml</b> file so that it only has the following:
 
 ```
   <property>  
@@ -133,7 +133,7 @@ Change core-site.xml file so that it only has the following:
 </configuration>
 ```
 
-For hdfs-site.xml configuration file, we need to delete any datanode parameters because our datanode is now on a separate machine (slave01).  So change the hdfs-site.xml according to the following:
+For hdfs-site.xml configuration file, we need to delete any datanode parameters because our datanode is now on a separate machine (slave01).  So change the <b>hdfs-site.xml</b> according to the following:
 
 ```
 <configuration>
