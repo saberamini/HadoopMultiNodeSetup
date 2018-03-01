@@ -152,8 +152,6 @@ For hdfs-site.xml configuration file, we need to delete any datanode parameters 
   <property>. 
      <name>dfs.permissions.enabled</name>
      <value>false</value>
-     <description>If "true", enable permission checking in HDF.  If "false", permission checking is turned off, but all other behaviour is unchanged.  Switching from one parameter value to the other does not change the mode, ownder or group of files or directories
-     </description>
   </property>
 </configuration>
 ```
@@ -175,11 +173,9 @@ Now consequencyt in the slave node, you will have the datanode - it will store t
     <name>dfs.datanode.data.dir</name>
     <value>file:///home/hduser/hadoop_data/hdfs/datanode</value>
   </property>
-  <property>. 
+  <property>
      <name>dfs.permissions.enabled</name>
      <value>false</value>
-     <description>If "true", enable permission checking in HDF.  If "false", permission checking is turned off, but all other behaviour is unchanged.  Switching from one parameter value to the other does not change the mode, ownder or group of files or directories
-     </description>
   </property>
 </configuration>
 ```
