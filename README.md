@@ -25,15 +25,15 @@ PING 10.101.243.183 (10.101.243.183) 56(84) bytes of data.
 
 The output should be something as above.  To stop the ping enter CTRL-C.
 
-We need to now change the name of the machines.  Since we cloned our original Hadoop Node to get a master and slave, both nodes now have the same name (whatever you chose for your clone).  Remember, the machine neame is always displayed in the terminal prompt after user name and the @ sign.  (hduser@[machinename])
+We need to now change the name of the machines.  Since we cloned our original Hadoop Node to get a master and slave, both nodes now have the same name (whatever name you chose for your original machine).  Remember, the machine name is always displayed in the terminal prompt after user name and the @ sign.  (hduser@[machinename])
 
-To change the machine name, execute the following command on both machines
+To change the machine name, execute the following command on both your slave and master node:
 
 > sudo gedit /etc/hostname
 
-For the slave machine, change the machine name to "slave01".  For the master, change the machine name to "master"
+For the slave machine, change the machine name to "slave01".  For the master, change the machine name to "master".
 
-We will now configure all the ip-addresses.  We need a way for the master and slave to know each other's ip address.
+We will now configure all the IP addresses.  We need a way for the master and slave to know each other's ip address.
 
 > sudo gedit /etc/hosts
 
@@ -51,7 +51,7 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ```
 
-Here HadoopNode is the machine name (that we just changed).  It may be different for your machine.  First delete or comment out the old address "127.0.1.1 [machine_name]" and place the ip address and name as follows:
+Here HadoopNode is the machine name (that we just changed).  It may be different for your machine.  First delete or comment out the old address "127.0.1.1 [machine_name]" and place the IP address and name of the master and slave nodes as follows:
 
 ```
 10.131.248.81 slave01
@@ -59,15 +59,15 @@ Here HadoopNode is the machine name (that we just changed).  It may be different
 10.101.243.183 master
 ```
 
-Note that your ip addresses will be different.  
+Note that your IP addresses will be different.  
 
 Do the same thing for your other node (slave or master depending on what you did first).
 
 For the changes to take effect, we need to reboot our machines. For both master and slave, enter the following command:
 
-> reboot
+> sudo reboot
 
-Log in to both machines and open a terminal.  YOu should see the hostname changes having taken effect (master is called hduser@master and slave is called hduser@slave).  If not, check again that the hostname file was changed and saved as outlined above.
+Log in to both machines and open a terminal.  You should see the hostname changes having taken effect (The master node now has a prompt of hduser@master and slave is called hduser@slave).  If not, check again that the hostname file was changed and saved as outlined  above.
 
 For a sanity check though, run the following command on both master and slave:
 
@@ -103,12 +103,12 @@ Similarly, perform the same test on the slave
 
 > ping master
 
-You should get a similar output as for the master case.  If not, then check your hosts files (sudo gedit /etc/hosts) and make sure the name of the machines and their ip addresses have correctly been entered.
+You should get a similar output as for the master case.  If not, then check your hosts files (sudo gedit /etc/hosts) and make sure the name of the machines and their IP addresses have correctly been entered.
 
 
 ## Test SSH connectivity
 
-From both the slaev and master, try to first ssh to your own machine and to the other machine.  
+From both the slave and master, try to first ssh to your own machine and to the other machine.  
 
 > ssh master
 
@@ -116,7 +116,7 @@ From both the slaev and master, try to first ssh to your own machine and to the 
 
 Type yes for any prompts.  <b>You should be able to SSH without any password requests</b>.  If you get a password request, despite having a public authorization key, this generally means that your permissions on the directory or files are incorrect.  Your permission for your user directory (hduser) and .ssh folder (among others) must be 700 or 755 (read, write and execute privileges for the host, read only for everyone else).  See the issue being discussed <a href="https://unix.stackexchange.com/questions/36540/why-am-i-still-getting-a-password-prompt-with-ssh-with-public-key-authentication"> here </a>
 
-## Update your configuration files
+### Update your configuration files
 
 You need to update your core-site.xml <b>for master and slave(s)</b> and "localhost" to "master".  We will also remove the temporary directory.  Bring up the file in a text editor.
 
