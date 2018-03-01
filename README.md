@@ -51,9 +51,11 @@ Make another clone and call it "slave01"
 
 After the clone, for each machine (master, slave01) click on settings, Network and change the adaptor to "Bridged Adapter"
 
-<img src="CloningMachine2.jpg" alt="Cloning Machine" align="middle">
+<img src="CloningMachine3.jpg" alt="Cloning Machine" align="middle">
 
 ## Communication between slave and master
+
+Start up both virtual machines and log in as hduser.
 
 We now want to check and see if the slave node and the main node can communicate with each other.  We will do this by "pinging" each using the ping command from the terminal.
 
