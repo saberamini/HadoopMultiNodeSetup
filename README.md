@@ -114,7 +114,7 @@ From both the slaev and master, try to first ssh to your own machine and to the 
 
 > ssh slave01
 
-Type yes for any prompts.  You should be able to SSH without any password requests.
+Type yes for any prompts.  <b>You should be able to SSH without any password requests</b>.  If you get a password request, despite having a public authorization key, this generally means that your permissions on the directory or files are incorrect.  Your permission for your user directory (hduser) and .ssh folder (among others) must be 700 or 755 (read, write and execute privileges for the host, read only for everyone else).  See the issue being discussed <a href="https://unix.stackexchange.com/questions/36540/why-am-i-still-getting-a-password-prompt-with-ssh-with-public-key-authentication"> here </a>
 
 ## Update your configuration files
 
@@ -243,3 +243,25 @@ Similary in the slave nodes, I need to delete the datanode folder and recreate i
 Before starting the cluster, we need to format our namenode:
 
 > hdfs namenode -format
+
+## Start HDFS and YARN (master only)
+
+We will start our daemons on our master node.
+
+> start-dfs.sh
+
+> start-yarn.sh
+
+The master will then log onto to the slave node and start the necessary deamons there through ssh.
+
+Now see the java proceses that you have:
+
+> jps
+
+You should see should see a Namenode daemon.
+
+Now go to your slave node:
+
+> jps
+
+You should see a Datanode started here.
