@@ -1,5 +1,10 @@
 # Hadoop Multi-Node Setup
 
+So far we have spent a lot of time dealing with specific details of setting up the Hadoop ecosystem.  With all the details, we may fail to see the forest for the trees (or the trees for the forest?).  
+
+Towards that goal, for this tutorial, we would like to start off with a birds eye view of where things fit in.  You always have to look at a Hadoop ecosystem in two ways: one is storage and one is processing.  Hadoop always revolves around either storage or processing.  All the "technologies" that we briefly mentioned (MapReduce, Hive, PIG, Spark etc) somehow fit into one of these tasks and not all are complementary.  Some technologies are replacing others and the ecosystem is continuously evolving.
+
+<img src="HadoopComponents.jpg" alt="The Forest" align="middle">
 
 
 After the clone, for each node click on settings, Network and change the adaptor to 
