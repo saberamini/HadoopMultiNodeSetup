@@ -180,7 +180,7 @@ Now consequencyt in the slave node, you will have the datanode - it will store t
 </configuration>
 ```
 
-Now we need to update our yarn-site.xml (across all nodes).  The only change here for us is to change the namenode from localhost to master.
+Now we need to update our <b>yarn-site.xml</b> (across all nodes).  The only change here for us is to change the namenode from localhost to master.
 
 ```
 <configuration>
@@ -194,3 +194,46 @@ Now we need to update our yarn-site.xml (across all nodes).  The only change her
   </property>
 </configuration>
 ```
+
+Leave the <b>mapred-site.xml</b> as before.
+
+## Update master and slave files
+
+There are several helper files on the master node that are used by hadoop scripts to start appropriate services on master and slave nodes.  We need to update these files. 
+
+In the <b>master node</b>, execute the following command:
+
+> sudo gedit /usr/local/hadoop/etc/hadoop/slaves
+
+In the file that opens, you should see "localhost".  Delete this and put "slave01".  If you had more than one slave node, you would put the list in this file.
+
+Again on the master node, execute the following command:
+
+> sudo gedit /usr/local/hadoop/etc/hadoop/masters
+
+This file should be empty (because it does not exist and you have created it by the above command).  In this file, simply write the name of your master node, in our case "master".
+
+
+## Recreate Namenode folder (master only)
+
+We need to delete our old namenode directory and recreate the namenode directory with appropriate permissions.  To do so, execute the following commands:
+
+> sudo rm -rf /usr/local/hadoop_tmp
+
+> sudo mkdir -p /usr/local/hadoop_tmp/hdfs/namenode
+
+> sudo chown hduser:hadoop -R /usr/local/hadoop_tmp/
+
+> sudo chmod 777 /usr/local/hadoop_tmp/hdfs/namenode
+
+## Recreate Datanode folder (slaves only)
+
+Similary in the slave nodes, I need to delete the datanode folder and recreate it with appropriate permissions
+
+> sudo rm -rf /usr/local/hadoop_tmp
+
+> sudo mkdir -p /usr/local/hadoop_tmp/hdfs/datanode
+
+> sudo chown hduser:hadoop -R /usr/local/hadoop_tmp/
+
+> sudo chmod 777 /usr/local/hadoop_tmp/hdfs/datanode
