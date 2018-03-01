@@ -63,3 +63,9 @@ Note that your ip addresses will be different.
 
 Do the same thing for your other node (slave or master depending on what you did first).
 
+For the changes to take effect, we need to reboot our machines. For both master and slave, enter the following command:
+
+> reboot
+
+
+
