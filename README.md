@@ -31,9 +31,9 @@ As the diagram above shows, in a typical commercial cluster, we will have a mast
 
 Looking at the slave data nodes, the RAM is not a big deal but storage must be very large because this is where your data is being stored.
 
-Finally, we should always have a homogeneous software (OS, Hadoop) running on all the machines.
+Finally, we should always have homogeneous software (OS type, Hadoop version) running on all the machines.
 
-We will try to replicate a real world cluster by having a master and a slave node on a virtual machine.  
+So as you can see, the real advantage of Hadoop is in it's multinode architecture.  To get an appreciation for this, we will try to replicate a real world cluster by having a master and a slave node on a virtual machine.  
 
 # Hadoop Multi-Node Cluster Setup
 
