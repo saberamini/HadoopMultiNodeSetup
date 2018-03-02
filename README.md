@@ -25,7 +25,7 @@ Now the names may seem strange but essentially they are java <a href="https://en
 <img src="TypicalCluster.jpg" alt="Typical cluster showing the HDFS daemons" align="middle">
 
 
-Here each box represents a physical maschine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode, ResourceManager) and each slave node will have two daemons (DataNode, NodeManager).
+Here each box represents a physical machine.  DataNode, NameNode and Secondary NameNode are daemons.  In the above example, we are showing the HDFS daemons that will run on our cluster.  But parallel to this we will also have our YARN daemons (they do not exist on a separate cluster, but are part of the same cluster).  In that case, the master node will have two daemons (NameNode, ResourceManager) and each slave node will have two daemons (DataNode, NodeManager).
 
 As the diagram above shows, in a typical commercial cluster, we will have a master with excellent memory (but not much hard disk), a 64 bit operating system and a redundant power supply.  We will then have an <i>exact</i> replica of this machine and run the daemon SecondaryNameNode - the purpose of which is to take over in case the main master node fails (essentially a backup).
 
